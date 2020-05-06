@@ -6,7 +6,7 @@ LinkedList::LinkedList()
 	curr = NULL;
 	temp = NULL;
 }
-void LinkedList::addNode(Customer addCustomer)
+void LinkedList::AddNode(Customer addCustomer)
 {
 	nodePtr n = new node;
 	n->next = NULL;
@@ -26,7 +26,7 @@ void LinkedList::addNode(Customer addCustomer)
 	}
 }
 
-void LinkedList::deleteNode(Customer delData)
+void LinkedList::DeleteNode(Customer delData)
 {
 	nodePtr delPtr = NULL;
 	temp = head;
@@ -55,7 +55,7 @@ void LinkedList::deleteNode(Customer delData)
 	}
 }
 
-void LinkedList::printList()
+void LinkedList::PrintList()
 {
 	char pound = 156;
 	float sum = 0;
@@ -88,7 +88,7 @@ void LinkedList::printList()
 	std::cout << "The total earnings stand at " << pound + sum << "\n";
 }
 
-int LinkedList::listSize()
+int LinkedList::ListSize()
 {
 	int size = 0;
 
@@ -103,7 +103,7 @@ int LinkedList::listSize()
 	return size;
 }
 
-void LinkedList::deleteInst(Marina nListSpaces)
+void LinkedList::DeleteInst(Marina nListSpaces)
 {
 	curr = head;
 
@@ -116,7 +116,7 @@ void LinkedList::deleteInst(Marina nListSpaces)
 	updatedSpaces = nListSpaces;
 }
 
-string LinkedList::findFirst()
+string LinkedList::FindFirst()
 {
 	string temp;
 
@@ -135,7 +135,7 @@ string LinkedList::findFirst()
 	return temp;
 }
 
-Customer LinkedList::deleteCustomer(string custName, string boatName)
+Customer LinkedList::DeleteBooking(string custName, string boatName)
 {
 	// Data that will be looping from the list
 	string currentData;
@@ -184,17 +184,17 @@ Customer LinkedList::deleteCustomer(string custName, string boatName)
 	}
 }
 
-Marina LinkedList::returnSpace()
+Marina LinkedList::ReturnSpace()
 {
 	return updatedSpaces;
 }
 
-float LinkedList::returnRemainSpace()
+float LinkedList::ReturnRemainSpace()
 {
 	return space;
 }
 
-void LinkedList::calculateRemainSpace()
+void LinkedList::CalculateRemainSpace()
 {
 	float space = 150;
 

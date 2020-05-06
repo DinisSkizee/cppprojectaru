@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "linkedlist.h"
 #include <stdlib.h>
 #include <iostream>
 #include <cstdlib>
@@ -9,6 +10,9 @@ int main()
 {
 	// Classes Declaration
 	Menu menu;
+
+	// Create LinkedList
+	LinkedList Linlist;
 
 	// Method Calls
 	menu.DisplayMenu();

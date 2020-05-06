@@ -11,16 +11,16 @@ class LinkedList
 
 public:
 	LinkedList();
-	void addNode(Customer);
-	void deleteNode(Customer);
-	void printList();
-	void calculateRemainSpace();
-	float returnRemainSpace();
-	int listSize();
-	void deleteInst(Marina);
-	string findFirst();
-	Customer deleteCustomer(string, string);
-	Marina returnSpace();
+	void AddNode(Customer);
+	void DeleteNode(Customer);
+	void PrintList();
+	void CalculateRemainSpace();
+	float ReturnRemainSpace();
+	int ListSize();
+	void DeleteInst(Marina);
+	string FindFirst();
+	Customer DeleteBooking(string, string);
+	Marina ReturnSpace();
 
 private:
 	Marina updatedSpaces;
