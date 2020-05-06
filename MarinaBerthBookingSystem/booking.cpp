@@ -1,8 +1,4 @@
 #include "booking.h"
-#include "menu.h"
-#include <iostream>
-#include <cstdlib>
-#include <limits>
 
 using namespace std;
 
@@ -79,24 +75,42 @@ void Booking::BookingLengthShallow()
 	// Display a board and ask the user to input the boat type
 	std::cout << "\n 	          Length must be between 1 and 15 meters\n";
 	
-	do
+	// Get user input for boatLength
+	boatLengthgt:
+	std::cout << "	             Boat Length: ";
+	std::cin >> boatLength;
+	if (cin)
 	{
-		// Get user input for boatLength
-		std::cout << "	             Boat Length: "; std::cin >> boatLength;
-	} while (boatLength < 1 || boatLength > 15);
+		boatShallowgt:
+		std::cout << "" << endl;
+		std::cout << "	          Shallow must be between 1 and 5 meters\n";
 
-	std::cout << "" << endl;
-	std::cout << "	          Shallow must be between 1 and 5 meters\n";
-	do
-	{
 		// Get user input for boatShallow
-		std::cout << "	             Boat Shallow: "; std::cin >> boatShallow;
-	} while (boatLength < 1 || boatShallow > 5);
-	
-	system("CLS");
-	Confirmation();
+		std::cout << "	             Boat Shallow: ";
+		std::cin >> boatShallow;
+		if (cin)
+		{
+			system("CLS");
+			Confirmation();
+		}
+		else
+		{
+			std::cout << "Incorrect input, Only Numbers Allowed\n";
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			goto boatShallowgt;
+		}
+	}
+	else
+	{
+		std::cout << "Incorrect Input, Only Numbers Allowed\n";
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		goto boatLengthgt;
+	}
 }
 
+int bookingPrice = boatLength * boatStay * 10;
 void Booking::Confirmation()
 {
 	// Variable Declaration
@@ -109,7 +123,7 @@ void Booking::Confirmation()
 	std::cout << "	               Your Boat's Type: " << boatType << "\n";
 	std::cout << "	               Your Boat's Length: " << boatLength << "\n";
 	std::cout << "	               Your Boat's Shallow: " << boatShallow << "\n\n";
-	std::cout << "	               Total Price: " << pound << (boatLength * boatStay * 10) << "\n\n";
+	std::cout << "	               Total Price: " << pound + bookingPrice << "\n\n";
 	std::cout << "       Type CONFIRM to complete the booking or else to leave\n\n";
 	std::cout << "	-----------------------------------------------------------" << "\n\n";
 	
@@ -134,10 +148,24 @@ void Booking::Confirmation()
 void Booking::CompletedBookingDisplay()
 {
 	std::cout << "\n	-----------------  Completed Booking -----------------\n\n\n";
-	std::cout << "             THANKS COMPLETING YOUR BOOKING\n";
-	std::cout << "             YOUR BOAT WILL NOW BE ADDED TO\n";
-	std::cout << "                 OUR MARINA FOR " << boatStay << " MONTHS\n\n\n";
+	std::cout << "                THANKS COMPLETING YOUR BOOKING\n";
+	std::cout << "                YOUR BOAT WILL NOW BE ADDED TO\n";
+	std::cout << "                        OUR MARINA FOR " << boatStay << " MONTHS\n\n\n";
 	std::cout << "	-----------------------------------------------------------\n";
+
+	Boat newBoat;
+	newBoat.setBoatLength(boatLength);
+	newBoat.setBoatShallow(boatShallow);
+	newBoat.setBoatName(boatName);
+	newBoat.setBoatType(boatType);
+	newBoat.setBoatStay(boatStay);
+	
+	Customer newCustomer;
+	newCustomer.setCustomerBoat(newBoat);
+	newCustomer.setCustomerName(ownerName);
+
+	Transaction newTransaction;
+	newTransaction.setTransPrice(bookingPrice);
 
 	system("PAUSE");
 
@@ -146,4 +174,6 @@ void Booking::CompletedBookingDisplay()
 	// Access the menu object DisplayMenu() and SelectMenu() Methods to display and select from the menu
 	menu.DisplayMenu();
 	menu.SelectMenu();
+
+
 }

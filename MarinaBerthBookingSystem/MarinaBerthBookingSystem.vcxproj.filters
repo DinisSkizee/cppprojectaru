@@ -27,6 +27,21 @@
     <ClCompile Include="booking.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="customer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="boat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="transaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linkedlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="marina.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h">
@@ -36,6 +51,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="booking.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="customer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="transaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linkedlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marina.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

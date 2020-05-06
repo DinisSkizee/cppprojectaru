@@ -1,5 +1,11 @@
 #pragma once
+#include "menu.h"
+#include "boat.h"
+#include "customer.h"
 #include <string>
+#include <iostream>
+#include <cstdlib>
+#include <limits>
 
 class Booking
 {
