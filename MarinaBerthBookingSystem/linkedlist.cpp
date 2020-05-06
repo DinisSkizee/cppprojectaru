@@ -58,9 +58,9 @@ void LinkedList::deleteNode(Customer delData)
 void LinkedList::printList()
 {
 	char pound = 156;
-	int sum = 0;
-	int months = 0;
-	int space = 150;
+	float sum = 0;
+	float months = 0;
+	float space = 150;
 
 	curr = head;
 	
@@ -88,26 +88,6 @@ void LinkedList::printList()
 	std::cout << "The total earnings stand at " << pound + sum << "\n";
 }
 
-void LinkedList::calculateRSpace()
-{
-	int space = 150;
-
-	curr = head;
-
-	while (curr != nullptr)
-	{
-		space -= curr->customer.getCustomerBoat().getBoatLength();
-
-		curr = curr->next;
-	}
-	this->space = space;
-}
-
-float LinkedList::returnRSpace()
-{
-	return space;
-}
-
 int LinkedList::listSize()
 {
 	int size = 0;
@@ -123,22 +103,17 @@ int LinkedList::listSize()
 	return size;
 }
 
-void LinkedList::deleteInst(Marina nSpaces)
+void LinkedList::deleteInst(Marina nListSpaces)
 {
 	curr = head;
 
 	while (curr != NULL)
 	{
-		nSpaces.nSpace.remove(curr->customer.getMarinaPosition());
+		nListSpaces.listSpaces.remove(curr->customer.getMarinaPosition());
 		curr = curr->next;
 	}
 
-	updatedSpaces = nSpaces;
-}
-
-Marina LinkedList::returnSpace()
-{
-	return updatedSpaces;
+	updatedSpaces = nListSpaces;
 }
 
 string LinkedList::findFirst()
@@ -162,14 +137,74 @@ string LinkedList::findFirst()
 
 Customer LinkedList::deleteCustomer(string custName, string boatName)
 {
-	string currData;
-	string currData2;
-	string inputData;
-	string inputData2;
-	inputData = custName;
-	inputData2 = boatName;
+	// Data that will be looping from the list
+	string currentData;
+	string currentData2;
 
-	std::for_each(inputData.begin(), inputData.end(), [](char& c) {
+	// Data to be checked (and deleted)
+	string dataToCheck;
+	string dataToCheck2;
+
+	dataToCheck = custName;
+	dataToCheck2 = boatName;
+
+	// Convert everything in the string to Upper Case
+	std::for_each(dataToCheck.begin(), dataToCheck.end(), [](char& c) {
 		c = ::toupper(c);
 		});
+
+	std::for_each(dataToCheck2.begin(), dataToCheck2.end(), [](char& c) {
+		c = ::toupper(c);
+		});
+
+	curr = head; // go to the start of the list
+
+	// While loop to check the values from the list and assign it to the currentData variables
+	while (curr != NULL)
+	{
+		currentData = curr->customer.getCustomerName();
+		std::for_each(currentData.begin(), currentData.end(), [](char& c) {
+			c = ::toupper(c);
+			});
+
+		currentData2 = curr->customer.getCustomerBoat().getBoatName();
+		std::for_each(currentData2.begin(), currentData2.end(), [](char& c) {
+			c = ::toupper(c);
+			});
+
+		// Check if the data to check is equal to the current data so it can delete the correct value
+		if (currentData == dataToCheck && currentData2 == dataToCheck2)
+		{
+			Customer custTemp;
+			custTemp = curr->customer;
+			return custTemp;
+		}
+		// Next in the list
+		curr = curr->next;
+	}
+}
+
+Marina LinkedList::returnSpace()
+{
+	return updatedSpaces;
+}
+
+float LinkedList::returnRemainSpace()
+{
+	return space;
+}
+
+void LinkedList::calculateRemainSpace()
+{
+	float space = 150;
+
+	curr = head;
+
+	while (curr != nullptr)
+	{
+		space -= curr->customer.getCustomerBoat().getBoatLength();
+
+		curr = curr->next;
+	}
+	this->space = space;
 }

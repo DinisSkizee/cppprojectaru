@@ -14,8 +14,8 @@ public:
 	void addNode(Customer);
 	void deleteNode(Customer);
 	void printList();
-	void calculateRSpace();
-	float returnRSpace();
+	void calculateRemainSpace();
+	float returnRemainSpace();
 	int listSize();
 	void deleteInst(Marina);
 	string findFirst();
