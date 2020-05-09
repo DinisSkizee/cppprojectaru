@@ -1,9 +1,4 @@
 #include "quotation.h"
-#include "menu.h"
-#include <iostream>
-#include <cstdlib>
-
-using namespace std;
 
 // Pound symbol needs to be added this way in C++
 unsigned char pound = 156;
@@ -24,10 +19,10 @@ void Quotation::QuotationDisplay()
 	do
 	{
 		// Get user input for boatLength
-		std::cout << "	             Boat Length: "; std::cin >> boatLength;
+		std::cout << " 	          Boat Length: "; std::cin >> boatLength;
 	} while (boatLength < 1 || boatLength > 15);
 
-	std::cout << "	                 Stay Duration: "; std::cin >> durationStay;
+	std::cout << " 	          Stay Duration: "; std::cin >> durationStay;
 
 	// Clean the console
 	system("CLS");

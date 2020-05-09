@@ -2,6 +2,7 @@
 #include "menu.h"
 #include "boat.h"
 #include "customer.h"
+#include "linkedlist.h"
 #include <string>
 #include <iostream>
 #include <cstdlib>

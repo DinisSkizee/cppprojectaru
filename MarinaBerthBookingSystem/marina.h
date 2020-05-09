@@ -11,14 +11,21 @@ class Marina
 {
 
 public:
-	void createSpaces();
+	Marina();
 
-	int getSpaceID();
+	int ID;
+	float marina;
+
+	void CreateSpaces();
+
+	int getSpaceNumber();
 	int getSpacesCount();
 	void setSpaceID(int);
-	int spaceAssignment();
+	int SpaceAssignment();
+
+	float getSpaceLeft();
+	void setSpaceLeft(float);
 
 	list<int> listSpaces;
 
-	int ID;
 };

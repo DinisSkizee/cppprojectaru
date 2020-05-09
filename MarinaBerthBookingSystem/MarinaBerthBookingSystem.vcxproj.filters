@@ -42,6 +42,12 @@
     <ClCompile Include="marina.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\DinisSkizee\Desktop\ok\sqlite3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbconnection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h">
@@ -68,5 +74,11 @@
     <ClInclude Include="marina.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dbconnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

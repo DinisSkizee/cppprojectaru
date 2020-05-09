@@ -38,7 +38,7 @@ void LinkedList::DeleteNode(Customer delData)
 	}
 	if (curr == NULL)
 	{
-		std::cout << delData.getID() << "the data couldn't be found in the LinkedList\n";
+		std::cout << delData.getID() << " the data wasn't found in the Database\n";
 	}
 	else
 	{
@@ -135,61 +135,17 @@ string LinkedList::FindFirst()
 	return temp;
 }
 
-Customer LinkedList::DeleteBooking(string custName, string boatName)
+// LinkedList Deletion Method wasn't needed because data is being deleted directly from the database
+/*Customer LinkedList::DeleteBooking(string custName, string boatName)
 {
-	// Data that will be looping from the list
-	string currentData;
-	string currentData2;
+}*/
 
-	// Data to be checked (and deleted)
-	string dataToCheck;
-	string dataToCheck2;
-
-	dataToCheck = custName;
-	dataToCheck2 = boatName;
-
-	// Convert everything in the string to Upper Case
-	std::for_each(dataToCheck.begin(), dataToCheck.end(), [](char& c) {
-		c = ::toupper(c);
-		});
-
-	std::for_each(dataToCheck2.begin(), dataToCheck2.end(), [](char& c) {
-		c = ::toupper(c);
-		});
-
-	curr = head; // go to the start of the list
-
-	// While loop to check the values from the list and assign it to the currentData variables
-	while (curr != NULL)
-	{
-		currentData = curr->customer.getCustomerName();
-		std::for_each(currentData.begin(), currentData.end(), [](char& c) {
-			c = ::toupper(c);
-			});
-
-		currentData2 = curr->customer.getCustomerBoat().getBoatName();
-		std::for_each(currentData2.begin(), currentData2.end(), [](char& c) {
-			c = ::toupper(c);
-			});
-
-		// Check if the data to check is equal to the current data so it can delete the correct value
-		if (currentData == dataToCheck && currentData2 == dataToCheck2)
-		{
-			Customer custTemp;
-			custTemp = curr->customer;
-			return custTemp;
-		}
-		// Next in the list
-		curr = curr->next;
-	}
-}
-
-Marina LinkedList::ReturnSpace()
+Marina LinkedList::getSpace()
 {
 	return updatedSpaces;
 }
 
-float LinkedList::ReturnRemainSpace()
+float LinkedList::getRemainSpace()
 {
 	return space;
 }

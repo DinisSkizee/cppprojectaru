@@ -20,7 +20,7 @@ public:
 	// Destructor
 	~Transaction();
 
-	void cTransaction(int, float, int);
+	void CTransaction(int, float, int);
 
 	int getTransID();
 

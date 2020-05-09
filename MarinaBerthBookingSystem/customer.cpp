@@ -45,7 +45,7 @@ void Customer::setMarinaPosition(int nMarinaPosition)
 	marinaPosition = nMarinaPosition;
 }
 
-void Customer::addTransaction(Transaction nTransaction)
+void Customer::AddTransaction(Transaction nTransaction)
 {
 	transaction = nTransaction;
 }

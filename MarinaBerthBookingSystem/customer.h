@@ -30,7 +30,7 @@ public:
 
 	void setMarinaPosition(int);
 
-	void addTransaction(Transaction);
+	void AddTransaction(Transaction);
 
 	Transaction getTransaction();
 

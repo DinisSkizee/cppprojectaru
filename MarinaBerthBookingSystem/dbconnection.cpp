@@ -1,0 +1,127 @@
+#include "dbconnection.h"
+
+// All the database connection and configuration was created by following the tutorial: https://www.youtube.com/watch?v=L-hnA82JsEM
+
+// Creates the Database
+int DBConnection::CreateDatabase(const char* x)
+{
+	sqlite3* DB;
+	int exit = 0;
+
+	exit = sqlite3_open(x, &DB);
+
+	sqlite3_close(DB);
+
+	return 0;
+}
+
+// Creates the database table if it doesn't exist already
+int DBConnection::CreateTable(const char* x)
+{
+	sqlite3* DB;
+
+	string sql = "CREATE TABLE IF NOT EXISTS CUSTOMERS("
+		"ID INTEGER PRIMARY KEY AUTOINCREMENT MINVALUE 1, "
+		"SPACE     INTEGER(6), "
+		"NAME       CHAR(50), "
+		"BOAT_NAME      CHAR(50), "
+		"BOAT_TYPE      CHAR(10), "
+		"BOAT_LENGTH      FLOAT(5,2), "
+		"BOAT_SHALLOW      FLOAT(5,2), "
+		"TRANSACTION_ID      INTEGER(5), "
+		"TOTAL_PRICE      FLOAT(20));";
+
+	try
+	{
+		int exit = 0;
+		exit = sqlite3_open(x, &DB);
+
+		char* messageError;
+		exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
+
+		if (exit != SQLITE_OK) {
+			cerr << "Error Creating Table" << endl;
+			sqlite3_free(messageError);
+		}
+		else 
+			std::cout << "Table Created Successfully" << endl;
+		sqlite3_close(DB);
+	}
+	catch (const exception & e)
+	{
+		cerr << e.what();
+	}
+
+	return 0;
+}
+
+// Insertion of Data to the Database
+int DBConnection::InsertData(const char* x, Customer customer)
+{
+	sqlite3* DB;
+	char* messageError;
+
+	int exit = sqlite3_open(x, &DB);
+
+	string sql = "INSERT INTO CUSTOMERS (ID, SPACE, NAME, BOAT_NAME, BOAT_TYPE, BOAT_LENGTH, BOAT_SHALLOW, TRANSACTION_ID, TOTAL_PRICE) VALUES('"
+		+ std::to_string(customer.getID()) + "', '" // Customer ID
+		+ std::to_string(customer.getMarinaPosition()) + "', '" // Boat Position in the Marina
+		+ customer.getCustomerName() + "', '" // Customer Name
+		+ customer.getCustomerBoat().getBoatName() + "', '" // Get Boat Name
+		+ customer.getCustomerBoat().getBoatType() + "', '" // Get Boat Type
+		+ std::to_string(customer.getCustomerBoat().getBoatLength()) + "', '" // Get Boat Length
+		+ std::to_string(customer.getCustomerBoat().getBoatShallow()) + "', '" // Get Boat Shallow
+		+ std::to_string(customer.getTransaction().getTransID()) + "', '"
+		+ std::to_string(customer.getTransaction().getTotalPrice()) + "');";
+
+	exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messageError);
+
+	if (exit != SQLITE_OK) {
+		cerr << "Error Inserting Data" << endl;
+		sqlite3_free(messageError);
+	}
+	else {
+		std::cout << "Records added Successfully!" << endl;
+	}
+
+	return 0;
+}
+
+// Method to Select Data from the Database
+int DBConnection::SelectData(const char* x)
+{
+	sqlite3* DB;
+
+	int exit = sqlite3_open(x, &DB);
+
+	string sql = "SELECT * FROM CUSTOMERS;";
+
+	sqlite3_exec(DB, sql.c_str(), CallBack, NULL, NULL);
+
+	return 0;
+}
+
+int DBConnection::CallBack(void* NotUsed, int argc, char** argv, char** azColName)
+{
+
+	for (int i = 0; i < argc; i++) {
+		// Column name and value
+		std::cout << azColName[i] << ": " << argv[i] << endl;
+	}
+
+	std::cout << endl;
+
+	return 0;
+}
+
+int DBConnection::DeleteData(const char* x, string customerName, string boatName)
+{
+	sqlite3* DB;
+	char* messageError;
+	int exit = sqlite3_open(x, &DB);
+
+	string sql = "DELETE FROM CUSTOMERS WHERE NAME='" + customerName + "' AND BOAT_NAME='" + boatName + "';";
+	sqlite3_exec(DB, sql.c_str(), CallBack, NULL, &messageError);
+
+	return 0;
+}

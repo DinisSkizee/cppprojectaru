@@ -15,15 +15,18 @@ public:
 	void DeleteNode(Customer);
 	void PrintList();
 	void CalculateRemainSpace();
-	float ReturnRemainSpace();
+	float getRemainSpace();
 	int ListSize();
 	void DeleteInst(Marina);
 	string FindFirst();
-	Customer DeleteBooking(string, string);
-	Marina ReturnSpace();
+	//Customer DeleteBooking(string, string);
+	Marina getSpace();
 
 private:
 	Marina updatedSpaces;
+	float space;
+
+	// Blueprint for the Linked List node
 	typedef struct node {
 		Customer customer;
 		node* next;
@@ -31,5 +34,4 @@ private:
 	nodePtr head;
 	nodePtr curr;
 	nodePtr temp;
-	float space;
 };
