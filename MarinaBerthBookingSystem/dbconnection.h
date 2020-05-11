@@ -10,6 +10,8 @@
 
 using namespace std;
 
+/* ALL THE COMMENTS ARE IN THE CPP FILES */
+
 class DBConnection
 {
 public:
@@ -19,6 +21,8 @@ public:
 	static int InsertData(const char* x, Customer);
 	static int SelectData(const char* x);
 	static int CallBack(void* NotUsed, int argc, char** argv, char** azColName);
-	static LinkedList mainList;
 	static int DeleteData(const char* x, string, string);
+	static inline LinkedList mainList;
+	LinkedList getList();
+	void setList(LinkedList);
 };

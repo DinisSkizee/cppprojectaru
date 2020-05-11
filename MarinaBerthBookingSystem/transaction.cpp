@@ -1,6 +1,9 @@
 #include "transaction.h"
 
+// Constructor
 Transaction::Transaction() {}
+
+// Destructor
 Transaction::~Transaction() {}
 
 // Set a standard math for the calculation of the Transaction

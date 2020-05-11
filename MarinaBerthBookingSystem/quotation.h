@@ -6,6 +6,8 @@
 
 using namespace std;
 
+/* ALL THE COMMENTS ARE IN THE CPP FILES */
+
 class Quotation
 {
 public:

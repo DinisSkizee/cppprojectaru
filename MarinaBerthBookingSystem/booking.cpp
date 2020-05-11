@@ -1,7 +1,5 @@
 #include "booking.h"
 
-using namespace std;
-
 // Pound symbol needs to be added this way in C++
 char pound = 156;
 
@@ -12,8 +10,10 @@ int boatStay;
 int boatLength;
 int boatShallow;
 
-void Booking::OwnerDetails()
+// Get Details from the user, Name, Boat name and Stay Duration
+void Booking::OwnerDetails(LinkedList &list)
 {
+
 	// Display a board for the booking class
 	std::cout << "\n\n";
 	std::cout << "	------------------------ Booking ----------------------\n";
@@ -22,19 +22,21 @@ void Booking::OwnerDetails()
 	std::cout << "	             Boat Name: "; std::getline(cin, boatName);
 	std::cout << "	             Stay Duration (months): "; std::cin >> boatStay;
 	std::cout << "\n";
-	BookingTypeDisplay();
+	BookingTypeDisplay(list);
 }
 
-void Booking::BookingTypeDisplay()
+// Type Display (Front-End)
+void Booking::BookingTypeDisplay(LinkedList &list)
 {
 	std::cout << "	             What is your Boat Type?\n";
 	std::cout << "	             1) Narrow\n";
 	std::cout << "	             2) Sailing\n";
 	std::cout << "	             3) Motor\n";
-	BookingTypeSelect();
+	BookingTypeSelect(list);
 }
 
-void Booking::BookingTypeSelect()
+// Selection of the Boat Type (Back-End)
+void Booking::BookingTypeSelect(LinkedList &list)
 {
 	// Variable Declaration
 	int option;
@@ -67,10 +69,11 @@ void Booking::BookingTypeSelect()
 	} while (option < 1 || option > 3);
 
 	// Call Method to get Boat Length Display and Select
-	BookingLengthShallow();
+	BookingLengthShallow(list);
 }
 
-void Booking::BookingLengthShallow()
+// Get the Boat Length and Shallow and verify input
+void Booking::BookingLengthShallow(LinkedList& list)
 {
 	// Display a board and ask the user to input the boat type
 	std::cout << "\n 	          Length must be between 1 and 15 meters\n";
@@ -91,7 +94,7 @@ void Booking::BookingLengthShallow()
 		if (cin)
 		{
 			system("CLS");
-			Confirmation();
+			Confirmation(list);
 		}
 		else
 		{
@@ -110,12 +113,17 @@ void Booking::BookingLengthShallow()
 	}
 }
 
+// Variable for the Booking Price as it is always the Length * Stay * 10
 int bookingPrice = boatLength * boatStay * 10;
-void Booking::Confirmation()
+
+// Method for the Confirmation that will display a small panel with details and a
+// Confirmation input to confirm
+void Booking::Confirmation(LinkedList& list)
 {
 	// Variable Declaration
 	string confirmed;
 
+	// Small Panel To Output the previous Inputs
 	std::cout << "	-----------------------  Confirmation ---------------------\n\n";
 	std::cout << "	                " << pound << "10 * Length * Duration\n\n";
 	std::cout << "	               Your Name: " << ownerName << "\n";
@@ -130,10 +138,11 @@ void Booking::Confirmation()
 	std::cin.ignore(1234, '\n');
 	std::getline(cin, confirmed);
 
+	// Confirmation input
 	if (confirmed == "CONFIRM")
 	{
 		system("CLS");
-		CompletedBookingDisplay();
+		CompletedBookingDisplay(list);
 	}
 	else
 	{
@@ -145,7 +154,10 @@ void Booking::Confirmation()
 	}
 }
 
-void Booking::CompletedBookingDisplay()
+// Display for when the booking is completed
+// Plus asset variables to it's classes, Insert Data into the DB
+// Go to the menu again
+void Booking::CompletedBookingDisplay(LinkedList &list)
 {
 	std::cout << "\n	-----------------  Completed Booking -----------------\n\n\n";
 	std::cout << "                THANKS COMPLETING YOUR BOOKING\n";
@@ -153,6 +165,7 @@ void Booking::CompletedBookingDisplay()
 	std::cout << "                        OUR MARINA FOR " << boatStay << " MONTHS\n\n\n";
 	std::cout << "	-----------------------------------------------------------\n";
 
+	// Add data to the boat class
 	Boat newBoat;
 	newBoat.setBoatLength(boatLength);
 	newBoat.setBoatShallow(boatShallow);
@@ -160,20 +173,21 @@ void Booking::CompletedBookingDisplay()
 	newBoat.setBoatType(boatType);
 	newBoat.setBoatStay(boatStay);
 	
+	// Add data to the Customer class
 	Customer newCustomer;
 	newCustomer.setCustomerBoat(newBoat);
 	newCustomer.setCustomerName(ownerName);
+	//newCustomer.setMarinaPosition(marina.SpaceAssignment());
+	newCustomer.setCustomerBoat(newBoat);
+	newCustomer.AddTransaction(trans);
 
+	// Add data to the transaction class
 	Transaction newTransaction;
 	newTransaction.setTransPrice(bookingPrice);
 
-	system("PAUSE");
-
-	Menu menu;
-	system("CLS");
-	// Access the menu object DisplayMenu() and SelectMenu() Methods to display and select from the menu
-	menu.DisplayMenu();
-	menu.SelectMenu();
-
-
+	// Insert the data into the database
+	const char* db = "..\\database.db";
+	DBConnection database;
+	database.InsertData(db, newCustomer);
+	list.AddNode(newCustomer);
 }

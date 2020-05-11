@@ -6,6 +6,8 @@
 #include <iostream>
 #include <algorithm>
 
+/* ALL THE COMMENTS ARE IN THE CPP FILES */
+
 class LinkedList
 {
 
@@ -23,6 +25,7 @@ public:
 	Marina getSpace();
 
 private:
+	char pound = 156;
 	Marina updatedSpaces;
 	float space;
 

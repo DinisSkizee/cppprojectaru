@@ -19,13 +19,15 @@ int main()
 	marina.CreateSpaces();
 
 	DBConnection database;
+	LinkedList freshList;
 	database.CreateDatabase(db);
 	database.CreateTable(db);
 
-	LinkedList mainList;
 	start:
-	// Need something to populate the data !!!!
-	menu.setList(mainList);
+	database.setList(freshList);
+	database.SelectData(db);
+
+	menu.setList(database.getList());
 
 	// Method Calls
 	menu.DisplayMenu();

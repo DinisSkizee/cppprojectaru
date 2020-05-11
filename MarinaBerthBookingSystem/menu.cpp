@@ -1,8 +1,11 @@
 #include "menu.h"
 
+// Menu Display (Front-End)
 void Menu::DisplayMenu()
 {
-	Marina marinaClass;
+	// Calculate the Remaining Space at the start to display it later in the menu
+	menuList.CalculateRemainSpace();
+
 	// Main menu that displays all the different options for the booking system
 	std::cout << "                Welcome to my Marina Berth Booking System       " << "\n" << endl;
 	std::cout << "	---------------------- Main Menu ----------------------" << endl;
@@ -14,10 +17,11 @@ void Menu::DisplayMenu()
 	std::cout << "	|                                                     |" << endl;
 	std::cout << "	|  5)  Exit the Program                               |" << endl;
 	std::cout << "	|                                                     |" << endl;
-	std::cout << "	|  Meters Left: "<< marinaClass.getSpaceLeft() << "                                    |" << endl;
+	std::cout << "	|  Meters Left: "<< menuList.getRemainSpace() << "                                   |" << endl;
 	std::cout << "	-------------------------------------------------------" << "\n" << endl;
 }
 
+// Menu Selection (Back-End)
 void Menu::SelectMenu()
 {
 	// Variable Declaration
@@ -43,11 +47,13 @@ void Menu::SelectMenu()
 		{
 			system("CLS");
 			Booking booking;
-			booking.OwnerDetails();
+			booking.OwnerDetails(menuList);
 			break;
 		}
 		case 3:  // Delete a Record
 		{
+			// If the list isn't equal to 0 it will be possible to delete otherwise there's no value to delete so it
+			// will just tell the user that there's no values in the DB
 			if (dbase.mainList.ListSize() != 0)
 			{
 				// Temporary Variables
@@ -99,11 +105,11 @@ void Menu::SelectMenu()
 	} while (option < 1 || option > 6);
 }
 
+// Get Set for the List
 LinkedList Menu::GetList()
 {
 	return menuList;
 }
-
 void Menu::setList(LinkedList newList)
 {
 	menuList = newList;
